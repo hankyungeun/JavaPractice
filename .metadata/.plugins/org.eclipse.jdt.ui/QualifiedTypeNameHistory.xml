@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="com.kh.practice.func.OperatorPractice"/>
+    <fullyQualifiedTypeName name="com.kh.practice2.func.CastingPracitce1"/>
+    <fullyQualifiedTypeName name="java.lang.invoke.VarHandle"/>
+    <fullyQualifiedTypeName name="com.kh.practice1.func.VariablePractice1"/>
+    <fullyQualifiedTypeName name="com.kh.practice.array.ArrayPractice"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="java.util.Random"/>
+    <fullyQualifiedTypeName name="java.util.Arrays"/>
+</qualifiedTypeNameHistroy>

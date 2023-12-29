@@ -196,7 +196,7 @@ public class DimensionPractice {
 		for(int i = 0; i < 3; i ++){
 			for(int j = 0; j < 2; j++){
 				if(arr1[i][j].equals(find)){
-					if(j == 0){
+					if(j == 0) {
 						RL+= "왼쪽";
 					}
 					else RL+= "오른쪽";

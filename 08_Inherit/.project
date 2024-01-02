@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>07_objectArray</name>
+	<name>08_Inherit</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -16,7 +16,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1704118913483</id>
+			<id>1704176884067</id>
 			<name></name>
 			<type>30</type>
 			<matcher>

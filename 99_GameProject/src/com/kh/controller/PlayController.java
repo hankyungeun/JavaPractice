@@ -59,6 +59,39 @@ public class PlayController {
 		
 	}
 	
+	public void method03() {
+		Random random = new Random();
+		int r = random.nextInt(998) + 1;
+		for(int i = 0 ; i < 10; i++) {
+			System.out.print("숫자 입력 : ");
+			int input = sc.nextInt();
+			if(input == r) {
+				u.setScore(u.getScore() + 10);
+				System.out.println("정답");
+			}
+			else {
+				int count1 = 0;
+				int count2 = 0;
+				while (input != 0) {
+					input /= 10;
+					count1++;
+				}
+				while (r != 0) {
+					r /= 10;
+					count2++;
+				}
+				if(count1 == count2) {
+					System.out.println("자릿수만 맞음");
+					u.setScore(u.getScore() + 3);
+				}
+				else {
+					System.out.println("틀림");
+					u.setScore(u.getScore() - 10);
+				}
+			}
+		}
+	}
+	
 	public void getUserInfo() {
 		System.out.println(u.toString());
 	}

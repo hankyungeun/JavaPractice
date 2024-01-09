@@ -4,6 +4,8 @@ import com.kh.hw.shape.mode.vo.Shape;
 
 public class TriangleController {
     private Shape s = new Shape();
+   
+    //면적
     public double calcArea(double height, double width){
         s.setType(3);
         s.setHeight(height);

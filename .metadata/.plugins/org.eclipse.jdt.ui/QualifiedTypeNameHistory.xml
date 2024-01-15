@@ -1,21 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.kh.practice.func.OperatorPractice"/>
-    <fullyQualifiedTypeName name="com.kh.practice2.func.CastingPracitce1"/>
-    <fullyQualifiedTypeName name="java.lang.invoke.VarHandle"/>
-    <fullyQualifiedTypeName name="com.kh.practice1.func.VariablePractice1"/>
-    <fullyQualifiedTypeName name="com.kh.practice.array.ArrayPractice"/>
-    <fullyQualifiedTypeName name="java.util.Arrays"/>
-    <fullyQualifiedTypeName name="com.kh.practice.dimension.DimensionPractice"/>
-    <fullyQualifiedTypeName name="com.kh.example.practice1.model.vo.Member"/>
-    <fullyQualifiedTypeName name="com.kh.example.practice2.model.vo.Product"/>
-    <fullyQualifiedTypeName name="com.kh.example.practice6.model.vo.Book"/>
-    <fullyQualifiedTypeName name="com.kh.practice.student.controller.StudentController"/>
-    <fullyQualifiedTypeName name="com.kh.practice.student.view.StudentMenu"/>
-    <fullyQualifiedTypeName name="com.kh.practice.student.model.vo.Student"/>
-    <fullyQualifiedTypeName name="com.kh.practice.point.model.vo.Point"/>
-    <fullyQualifiedTypeName name="com.kh.practice.point.model.vo.Rectangle"/>
-    <fullyQualifiedTypeName name="com.kh.practice.point.model.vo.Circle"/>
     <fullyQualifiedTypeName name="com.kh.practice.point.controller.CircleController"/>
     <fullyQualifiedTypeName name="com.kh.practice.point.controller.RectangleController"/>
     <fullyQualifiedTypeName name="com.kh.practice.point.view.PointMenu"/>
@@ -29,13 +13,11 @@
     <fullyQualifiedTypeName name="com.kh.practice.chap01_poly.model.vo.Book"/>
     <fullyQualifiedTypeName name="com.kh.practice.chap01_poly.view.LibraryMenu"/>
     <fullyQualifiedTypeName name="com.kh.practice.chap01_poly.controller.LibraryController"/>
-    <fullyQualifiedTypeName name="java.util.Random"/>
     <fullyQualifiedTypeName name="com.kh.model.vo.User"/>
     <fullyQualifiedTypeName name="com.kh.controller.PlayController"/>
     <fullyQualifiedTypeName name="com.kh.view.DisplayMenu"/>
     <fullyQualifiedTypeName name="java.util.InputMismatchException"/>
     <fullyQualifiedTypeName name="com.kh.exception.CustomException"/>
-    <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="com.kh.practice.numRange.controller.NumberController"/>
     <fullyQualifiedTypeName name="com.kh.practice.numRange.view.NumberMenu"/>
     <fullyQualifiedTypeName name="com.kh.practice.numRange.exception.NumRangeException"/>
@@ -43,7 +25,6 @@
     <fullyQualifiedTypeName name="java.io.FileInputStream"/>
     <fullyQualifiedTypeName name="com.kh.io.practice.log.FileDAO"/>
     <fullyQualifiedTypeName name="com.kh.practice.file.model.dao.FileDAO"/>
-    <fullyQualifiedTypeName name="java.util.Scanner"/>
     <fullyQualifiedTypeName name="com.kh.practice.file.controller.FileController"/>
     <fullyQualifiedTypeName name="java.io.FileWriter"/>
     <fullyQualifiedTypeName name="java.io.Writer"/>
@@ -56,4 +37,27 @@
     <fullyQualifiedTypeName name="com.kh.generic.practice1.Material"/>
     <fullyQualifiedTypeName name="com.kh.generic.practice1.ThreeDPrinter"/>
     <fullyQualifiedTypeName name="com.kh.generic.practice1.Powder"/>
+    <fullyQualifiedTypeName name="com.kh.hospital_reception.model.vo.CustomArray"/>
+    <fullyQualifiedTypeName name="com.kh.hospital_reception.model.vo.Book"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="com.kh.hospital_reception.model.vo.StringArray"/>
+    <fullyQualifiedTypeName name="java.util.LinkedList"/>
+    <fullyQualifiedTypeName name="java.util.Random"/>
+    <fullyQualifiedTypeName name="com.kh.list.practice.MyStack"/>
+    <fullyQualifiedTypeName name="com.kh.list.practice.MyQueue"/>
+    <fullyQualifiedTypeName name="java.util.Comparator"/>
+    <fullyQualifiedTypeName name="java.awt.image.TileObserver"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.kh.practice.list.music.model.vo.Music"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="com.kh.practice.list.music.controller.MusicController"/>
+    <fullyQualifiedTypeName name="com.kh.practice.list.music.view.MusicView"/>
+    <fullyQualifiedTypeName name="java.util.HashSet"/>
+    <fullyQualifiedTypeName name="java.util.Set"/>
+    <fullyQualifiedTypeName name="java.util.Iterator"/>
+    <fullyQualifiedTypeName name="com.kh.set.practice.Member"/>
+    <fullyQualifiedTypeName name="com.kh.map.practice.MemberHashMap"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="com.kh.practice.generics.model.vo.Farm"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>

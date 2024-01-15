@@ -1715,3 +1715,1021 @@ Java Model Exception: Error in Java Model (code 1006): <project root> [in 15_Col
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1467)
 !SUBENTRY 1 org.eclipse.jdt.core 4 1006 2024-01-11 11:36:39.045
 !MESSAGE <project root> [in 15_Collection] is not on its project's build path
+!SESSION 2024-01-15 17:37:45.088 -----------------------------------------------
+eclipse.buildId=4.24.0.I20220607-0700
+java.version=17.0.3
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=macosx, ARCH=aarch64, WS=cocoa, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product -keyring /Users/hangyeong-eun/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch aarch64 -product org.eclipse.epp.package.jee.product -keyring /Users/hangyeong-eun/.eclipse_keyring
+
+!ENTRY org.eclipse.jface 2 0 2024-01-15 17:37:50.371
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2024-01-15 17:37:50.371
+!MESSAGE A conflict occurred for COMMAND+SHIFT+T:
+Binding(COMMAND+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@74471600,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(COMMAND+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1cc878e6,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2024-01-15 17:37:50.371
+!MESSAGE A conflict occurred for ALT+COMMAND+R:
+Binding(ALT+COMMAND+R,
+	ParameterizedCommand(Command(org.eclipse.ui.edit.rename,Rename,
+		Rename the selected item,
+		Category(org.eclipse.ui.category.file,File,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@247877f3,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
+Binding(ALT+COMMAND+R,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.rename.element,Rename - Refactoring ,
+		Rename the selected element,
+		Category(org.eclipse.jdt.ui.category.refactoring,Refactor - Java,Java Refactoring Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@44bb6856,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,cocoa,system)
+
+!ENTRY org.eclipse.jdt.core 4 4 2024-01-16 02:33:29.767
+!MESSAGE Exception occurred during compilation unit conversion:
+----------------------------------- SOURCE BEGIN -------------------------------------
+package com.kh.practice.generics.view;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Scanner;
+import java.util.Set;
+
+import com.kh.practice.generics.controller.FarmController;
+import com.kh.practice.generics.model.vo.Farm;
+import com.kh.practice.generics.model.vo.Fruit;
+import com.kh.practice.generics.model.vo.Nut;
+import com.kh.practice.generics.model.vo.Vegetable;
+
+public class FarmMenu {
+    private Scanner sc = new Scanner(System.in);
+    private FarmController fc = new FarmController();
+
+    public void mainMenu() {
+        while(true){
+            System.out.println("========== KH 마트 ==========");
+            System.out.println("=====***** 메인 메뉴 *****=====");
+            System.out.println("1. 직원 메뉴");
+            System.out.println("2. 손님 메뉴");
+            System.out.println("9. 종료");
+            System.out.print("메뉴 번호 입력 : ");
+            int select = sc.nextInt();
+            switch(select){
+                case 1: adminMenu(); break;
+                case 2: customerMenu(); break;
+                case 9: System.out.println("프로그램 종료."); return;
+                default: System.out.println("잘못 입력하였습니다. 다시 입력해주세요");
+            }
+        }
+    }
+    public void adminMenu() {
+        while(true){
+
+            System.out.println("******* 직원 메뉴 *******");
+            System.out.println("1. 새 농산물 추가"); 
+            System.out.println("2. 종류 삭제");
+            System.out.println("3. 수량 수정");  
+            System.out.println("4. 농산물 목록"); 
+            System.out.println("9. 메인으로 돌아가기"); 
+            System.out.print("메뉴 번호 선택 : ");
+            int num = sc.nextInt();
+            switch(num){
+                case 1: addNewKind(); break;
+                case 2: removeKind(); break;
+                case 3: changeAmount(); break;
+                case 4: printFarm(); break;
+                case 9: return;
+                default: System.out.println("잘못 입력하였습니다. 다시 입력해주세요"); break;
+            }
+        }
+    }
+    public void customerMenu() {
+        while(true){
+            System.out.println("현재 KH마트 농산물 수량");
+            printFarm();
+            System.out.println("******* 고객 메뉴 *******");
+            System.out.println("1. 농산물 사기");
+            System.out.println("2. 농산물 빼기");
+            System.out.println("3. 구입한 농산물 보기");
+            System.out.println("9. 메인으로 돌아가기");
+            System.out.print("메뉴 번호 선택 : ");
+            int num = sc.nextInt();
+            switch(num){
+                case 1: buyFarm(); break;
+                case 2: removeFarm(); break;
+                case 3: printBuyFarm(); break; 
+                case 9: return;
+                default: System.out.println("잘못 입력하였습니다. 다시 입력해주세요"); break;
+            }
+        }
+    }
+    public void addNewKind() {
+    	while(true) {
+	    	System.out.println("1. 과일 / 2. 채소 / 3. 견과");
+	    	System.out.print("추가할 종류 번호 : ");
+	    	int num = sc.nextInt();
+	    	String name;
+	    	int amount;
+	    	switch(num) {
+	    	case 1:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		System.out.print("수량 : ");
+	    		amount = sc.nextInt();
+	    		Fruit f = new Fruit("과일", name);
+	    		if(fc.addNewKind(f, amount)) {
+	    			System.out.println("새 농산물이 추가되었습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("새 농산물 추가에 실패하였습니다");
+	    			break;
+	    		}
+	    		
+	    	case 2:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		System.out.print("수량 : ");
+	    		amount = sc.nextInt();
+	    		Vegetable v = new Vegetable("채소", name);
+	    		if(fc.addNewKind(v, amount)) {
+	    			System.out.println("새 농산물이 추가되었습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("새 농산물 추가에 실패하였습니다");
+	    			break;
+	    		}
+	
+	    	case 3:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		System.out.print("수량 : ");
+	    		amount = sc.nextInt();
+	    		Nut n = new Nut("견과", name);
+	    		if(fc.addNewKind(n, amount)) {
+	    			System.out.println("새 농산물이 추가되었습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("새 농산물 추가에 실패하였습니다");
+	    			break;
+	    		}
+	    	default : System.out.println("잘못 입력하셨습니다. 다시 입력해주세요");	break;
+	    	}
+    	}
+    }
+    public void removeKind() {
+    	while(true) {
+	    	System.out.println("1. 과일 / 2. 채소 / 3. 견과");
+	    	System.out.print("삭제할 종류 번호 : ");
+	    	int num = sc.nextInt();
+	    	String name;
+	    	switch(num) {
+	    	case 1:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		Fruit f = new Fruit("과일", name);
+	    		if(fc.removeKind(f)) {
+	    			System.out.println("농산물 삭제에 성공하였습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("새 농산물 추가에 실패하였습니다. 다시 입력해주세요");
+	    			break;
+	    		}
+	    		
+	    	case 2:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		Vegetable v = new Vegetable("채소", name);
+	    		if(fc.removeKind(v)) {
+	    			System.out.println("농산물 삭제에 성공하였습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("새 농산물 추가에 실패하였습니다. 다시 입력해주세요");
+	    			break;
+	    		}
+	
+	    	case 3:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		Nut n = new Nut("견과", name);
+	    		if(fc.removeKind(n)) {
+	    			System.out.println("농산물 삭제에 성공하였습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("새 농산물 추가에 실패하였습니다. 다시 입력해주세요");
+	    			break;
+	    		}
+	    	default : System.out.println("잘못 입력하셨습니다. 다시 입력해주세요");	break;
+	    	}
+    	}
+    }
+    public void changeAmount() {
+    	while(true) {
+	    	System.out.println("1. 과일 / 2. 채소 / 3. 견과");
+	    	System.out.print("수정할 종류 번호 : ");
+	    	int num = sc.nextInt();
+	    	String name;
+	    	int amount;
+	    	switch(num) {
+	    	case 1:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		System.out.print("수정할 수량 : ");
+	    		amount = sc.nextInt();
+	    		Farm f = new Fruit("과일", name);
+	    		if(fc.changeAmount(f, amount)) {
+	    			System.out.println("농산물 수량이 수정되었습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("농산물 수량 수정에 실패하였습니다. 다시 입력해주세요.");
+	    			break;
+	    		}
+	    		
+	    	case 2:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		System.out.print("수정할 수량 : ");
+	    		amount = sc.nextInt();
+	    		Vegetable v = new Vegetable("채소", name);
+	    		if(fc.changeAmount(v, amount)) {
+	    			System.out.println("농산물 수량이 수정되었습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("농산물 수량 수정에 실패하였습니다. 다시 입력해주세요.");
+	    			break;
+	    		}
+	
+	    	case 3:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		System.out.print("수정할 수량 : ");
+	    		amount = sc.nextInt();
+	    		Nut n = new Nut("견과", name);
+	    		if(fc.changeAmount(n, amount)) {
+	    			System.out.println("농산물 수량이 수정되었습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("농산물 수량 수정에 실패하였습니다. 다시 입력해주세요.");
+	    			break;
+	    		}
+	    	default : System.out.println("잘못 입력하셨습니다. 다시 입력해주세요");	break;
+	    	}
+    	}
+    }
+    public void printFarm() {
+    	HashMap<Farm, Integer> farmData = fc.printFarm();
+    	for (Farm key : farmData.keySet()) {
+            int count = farmData.get(key);
+            if (key instanceof Fruit) {
+                Fruit fruit = (Fruit) key;
+                System.out.println(fruit.getKind() + ": " + fruit.getName() + "(" + count + "개)");
+            } else if (key instanceof Nut) {
+                Nut nut = (Nut) key;
+                System.out.println(nut.getKind() + ": " + nut.getName() + "(" + count + "개)");
+            } else if (key instanceof Vegetable) {
+                Vegetable vegetable = (Vegetable) key;
+                System.out.println(vegetable.getKind() + ": " + vegetable.getName() + "(" + count + "개)");
+            }
+        }
+    }
+    public void buyFarm() {
+    	while(true) {
+	    	System.out.println("1. 과일 / 2. 채소 / 3. 견과");
+	    	System.out.print("추가할 종류 번호 : ");
+	    	int num = sc.nextInt();
+	    	String name;
+	    	
+	    	switch(num) {
+	    	case 1:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		Fruit f = new Fruit("과일", name);
+	    		if(fc.buyFarm(f)) {
+	    			System.out.println("구매에 성공하였습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("마트에 없는 물건이거나 수량이 없습니다. 다시 입력해주세요.");
+	    			break;
+	    		}
+	    		
+	    	case 2:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		Vegetable v = new Vegetable("채소", name);
+	    		if(fc.buyFarm(v)) {
+	    			System.out.println("구매에 성공하였습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("마트에 없는 물건이거나 수량이 없습니다. 다시 입력해주세요.");
+	    			break;
+	    		}
+	
+	    	case 3:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		Nut n = new Nut("견과", name);
+	    		if(fc.buyFarm(n)) {
+	    			System.out.println("구매에 성공하였습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("마트에 없는 물건이거나 수량이 없습니다. 다시 입력해주세요.");
+	    			break;
+	    		}
+	    	default : System.out.println("잘못 입력하셨습니다. 다시 입력해주세요");	break;
+	    	}
+    	}
+    	
+    }
+    public void removeFarm() {
+    	while(true) {
+	    	System.out.println("1. 과일 / 2. 채소 / 3. 견과");
+	    	System.out.print("추가할 종류 번호 : ");
+	    	int num = sc.nextInt();
+	    	String name;
+	    	
+	    	switch(num) {
+	    	case 1:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		Fruit f = new Fruit("과일", name);
+	    		if(fc.removeFarm(f)) {
+	    			System.out.println("구매 취소에 성공하였습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("구매매 목록에 존재하지 않습니다. 다시 입력해주세요.");
+	    			break;
+	    		}
+	    		
+	    	case 2:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		Vegetable v = new Vegetable("채소", name);
+	    		if(fc.removeFarm(v)) {
+	    			System.out.println("구매 취소에 성공하였습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("구매매 목록에 존재하지 않습니다. 다시 입력해주세요.");
+	    			break;
+	    		}
+	
+	    	case 3:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		Nut n = new Nut("견과", name);
+	    		if(fc.removeFarm(n)) {
+	    			System.out.println("구매 취소에 성공하였습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("구매매 목록에 존재하지 않습니다. 다시 입력해주세요.");
+	    			break;
+	    		}
+	    	default : System.out.println("잘못 입력하셨습니다. 다시 입력해주세요");	break;
+	    	}
+    	}
+    }
+    public void printBuyFarm() {
+    	ArrayList<Farm> buyList= fc.printBuyFarm();
+    	Iterator<Farm> iter = buyList.iterator();
+    	while(iter.hasNext()) {
+    		System.out.println("종류: " + iter.next();() + ", 이름: " + farm.getName());
+		}
+    	
+    }
+}
+
+----------------------------------- SOURCE END -------------------------------------
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2047)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3853)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1953)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1990)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3095)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3013)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3504)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3087)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3390)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1534)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:540)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:201)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:132)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:94)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:91)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:158)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.jdt.ui 4 2 2024-01-16 02:33:29.777
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.ui".
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2047)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3853)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1953)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1990)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3095)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3013)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3504)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3087)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3390)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1534)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:540)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:201)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:132)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:94)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:91)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:158)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.jdt.ui 4 0 2024-01-16 02:33:29.777
+!MESSAGE Error in JDT Core during reconcile
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2047)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3853)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1953)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1990)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3095)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3013)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3504)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3087)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3390)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1534)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:540)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:201)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:132)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:94)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:91)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:158)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.jdt.core 4 4 2024-01-16 02:33:31.586
+!MESSAGE Exception occurred during compilation unit conversion:
+----------------------------------- SOURCE BEGIN -------------------------------------
+package com.kh.practice.generics.view;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Scanner;
+import java.util.Set;
+
+import com.kh.practice.generics.controller.FarmController;
+import com.kh.practice.generics.model.vo.Farm;
+import com.kh.practice.generics.model.vo.Fruit;
+import com.kh.practice.generics.model.vo.Nut;
+import com.kh.practice.generics.model.vo.Vegetable;
+
+public class FarmMenu {
+    private Scanner sc = new Scanner(System.in);
+    private FarmController fc = new FarmController();
+
+    public void mainMenu() {
+        while(true){
+            System.out.println("========== KH 마트 ==========");
+            System.out.println("=====***** 메인 메뉴 *****=====");
+            System.out.println("1. 직원 메뉴");
+            System.out.println("2. 손님 메뉴");
+            System.out.println("9. 종료");
+            System.out.print("메뉴 번호 입력 : ");
+            int select = sc.nextInt();
+            switch(select){
+                case 1: adminMenu(); break;
+                case 2: customerMenu(); break;
+                case 9: System.out.println("프로그램 종료."); return;
+                default: System.out.println("잘못 입력하였습니다. 다시 입력해주세요");
+            }
+        }
+    }
+    public void adminMenu() {
+        while(true){
+
+            System.out.println("******* 직원 메뉴 *******");
+            System.out.println("1. 새 농산물 추가"); 
+            System.out.println("2. 종류 삭제");
+            System.out.println("3. 수량 수정");  
+            System.out.println("4. 농산물 목록"); 
+            System.out.println("9. 메인으로 돌아가기"); 
+            System.out.print("메뉴 번호 선택 : ");
+            int num = sc.nextInt();
+            switch(num){
+                case 1: addNewKind(); break;
+                case 2: removeKind(); break;
+                case 3: changeAmount(); break;
+                case 4: printFarm(); break;
+                case 9: return;
+                default: System.out.println("잘못 입력하였습니다. 다시 입력해주세요"); break;
+            }
+        }
+    }
+    public void customerMenu() {
+        while(true){
+            System.out.println("현재 KH마트 농산물 수량");
+            printFarm();
+            System.out.println("******* 고객 메뉴 *******");
+            System.out.println("1. 농산물 사기");
+            System.out.println("2. 농산물 빼기");
+            System.out.println("3. 구입한 농산물 보기");
+            System.out.println("9. 메인으로 돌아가기");
+            System.out.print("메뉴 번호 선택 : ");
+            int num = sc.nextInt();
+            switch(num){
+                case 1: buyFarm(); break;
+                case 2: removeFarm(); break;
+                case 3: printBuyFarm(); break; 
+                case 9: return;
+                default: System.out.println("잘못 입력하였습니다. 다시 입력해주세요"); break;
+            }
+        }
+    }
+    public void addNewKind() {
+    	while(true) {
+	    	System.out.println("1. 과일 / 2. 채소 / 3. 견과");
+	    	System.out.print("추가할 종류 번호 : ");
+	    	int num = sc.nextInt();
+	    	String name;
+	    	int amount;
+	    	switch(num) {
+	    	case 1:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		System.out.print("수량 : ");
+	    		amount = sc.nextInt();
+	    		Fruit f = new Fruit("과일", name);
+	    		if(fc.addNewKind(f, amount)) {
+	    			System.out.println("새 농산물이 추가되었습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("새 농산물 추가에 실패하였습니다");
+	    			break;
+	    		}
+	    		
+	    	case 2:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		System.out.print("수량 : ");
+	    		amount = sc.nextInt();
+	    		Vegetable v = new Vegetable("채소", name);
+	    		if(fc.addNewKind(v, amount)) {
+	    			System.out.println("새 농산물이 추가되었습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("새 농산물 추가에 실패하였습니다");
+	    			break;
+	    		}
+	
+	    	case 3:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		System.out.print("수량 : ");
+	    		amount = sc.nextInt();
+	    		Nut n = new Nut("견과", name);
+	    		if(fc.addNewKind(n, amount)) {
+	    			System.out.println("새 농산물이 추가되었습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("새 농산물 추가에 실패하였습니다");
+	    			break;
+	    		}
+	    	default : System.out.println("잘못 입력하셨습니다. 다시 입력해주세요");	break;
+	    	}
+    	}
+    }
+    public void removeKind() {
+    	while(true) {
+	    	System.out.println("1. 과일 / 2. 채소 / 3. 견과");
+	    	System.out.print("삭제할 종류 번호 : ");
+	    	int num = sc.nextInt();
+	    	String name;
+	    	switch(num) {
+	    	case 1:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		Fruit f = new Fruit("과일", name);
+	    		if(fc.removeKind(f)) {
+	    			System.out.println("농산물 삭제에 성공하였습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("새 농산물 추가에 실패하였습니다. 다시 입력해주세요");
+	    			break;
+	    		}
+	    		
+	    	case 2:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		Vegetable v = new Vegetable("채소", name);
+	    		if(fc.removeKind(v)) {
+	    			System.out.println("농산물 삭제에 성공하였습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("새 농산물 추가에 실패하였습니다. 다시 입력해주세요");
+	    			break;
+	    		}
+	
+	    	case 3:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		Nut n = new Nut("견과", name);
+	    		if(fc.removeKind(n)) {
+	    			System.out.println("농산물 삭제에 성공하였습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("새 농산물 추가에 실패하였습니다. 다시 입력해주세요");
+	    			break;
+	    		}
+	    	default : System.out.println("잘못 입력하셨습니다. 다시 입력해주세요");	break;
+	    	}
+    	}
+    }
+    public void changeAmount() {
+    	while(true) {
+	    	System.out.println("1. 과일 / 2. 채소 / 3. 견과");
+	    	System.out.print("수정할 종류 번호 : ");
+	    	int num = sc.nextInt();
+	    	String name;
+	    	int amount;
+	    	switch(num) {
+	    	case 1:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		System.out.print("수정할 수량 : ");
+	    		amount = sc.nextInt();
+	    		Farm f = new Fruit("과일", name);
+	    		if(fc.changeAmount(f, amount)) {
+	    			System.out.println("농산물 수량이 수정되었습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("농산물 수량 수정에 실패하였습니다. 다시 입력해주세요.");
+	    			break;
+	    		}
+	    		
+	    	case 2:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		System.out.print("수정할 수량 : ");
+	    		amount = sc.nextInt();
+	    		Vegetable v = new Vegetable("채소", name);
+	    		if(fc.changeAmount(v, amount)) {
+	    			System.out.println("농산물 수량이 수정되었습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("농산물 수량 수정에 실패하였습니다. 다시 입력해주세요.");
+	    			break;
+	    		}
+	
+	    	case 3:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		System.out.print("수정할 수량 : ");
+	    		amount = sc.nextInt();
+	    		Nut n = new Nut("견과", name);
+	    		if(fc.changeAmount(n, amount)) {
+	    			System.out.println("농산물 수량이 수정되었습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("농산물 수량 수정에 실패하였습니다. 다시 입력해주세요.");
+	    			break;
+	    		}
+	    	default : System.out.println("잘못 입력하셨습니다. 다시 입력해주세요");	break;
+	    	}
+    	}
+    }
+    public void printFarm() {
+    	HashMap<Farm, Integer> farmData = fc.printFarm();
+    	for (Farm key : farmData.keySet()) {
+            int count = farmData.get(key);
+            if (key instanceof Fruit) {
+                Fruit fruit = (Fruit) key;
+                System.out.println(fruit.getKind() + ": " + fruit.getName() + "(" + count + "개)");
+            } else if (key instanceof Nut) {
+                Nut nut = (Nut) key;
+                System.out.println(nut.getKind() + ": " + nut.getName() + "(" + count + "개)");
+            } else if (key instanceof Vegetable) {
+                Vegetable vegetable = (Vegetable) key;
+                System.out.println(vegetable.getKind() + ": " + vegetable.getName() + "(" + count + "개)");
+            }
+        }
+    }
+    public void buyFarm() {
+    	while(true) {
+	    	System.out.println("1. 과일 / 2. 채소 / 3. 견과");
+	    	System.out.print("추가할 종류 번호 : ");
+	    	int num = sc.nextInt();
+	    	String name;
+	    	
+	    	switch(num) {
+	    	case 1:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		Fruit f = new Fruit("과일", name);
+	    		if(fc.buyFarm(f)) {
+	    			System.out.println("구매에 성공하였습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("마트에 없는 물건이거나 수량이 없습니다. 다시 입력해주세요.");
+	    			break;
+	    		}
+	    		
+	    	case 2:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		Vegetable v = new Vegetable("채소", name);
+	    		if(fc.buyFarm(v)) {
+	    			System.out.println("구매에 성공하였습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("마트에 없는 물건이거나 수량이 없습니다. 다시 입력해주세요.");
+	    			break;
+	    		}
+	
+	    	case 3:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		Nut n = new Nut("견과", name);
+	    		if(fc.buyFarm(n)) {
+	    			System.out.println("구매에 성공하였습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("마트에 없는 물건이거나 수량이 없습니다. 다시 입력해주세요.");
+	    			break;
+	    		}
+	    	default : System.out.println("잘못 입력하셨습니다. 다시 입력해주세요");	break;
+	    	}
+    	}
+    	
+    }
+    public void removeFarm() {
+    	while(true) {
+	    	System.out.println("1. 과일 / 2. 채소 / 3. 견과");
+	    	System.out.print("추가할 종류 번호 : ");
+	    	int num = sc.nextInt();
+	    	String name;
+	    	
+	    	switch(num) {
+	    	case 1:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		Fruit f = new Fruit("과일", name);
+	    		if(fc.removeFarm(f)) {
+	    			System.out.println("구매 취소에 성공하였습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("구매매 목록에 존재하지 않습니다. 다시 입력해주세요.");
+	    			break;
+	    		}
+	    		
+	    	case 2:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		Vegetable v = new Vegetable("채소", name);
+	    		if(fc.removeFarm(v)) {
+	    			System.out.println("구매 취소에 성공하였습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("구매매 목록에 존재하지 않습니다. 다시 입력해주세요.");
+	    			break;
+	    		}
+	
+	    	case 3:
+	    		System.out.print("이름 : ");
+	    		name = sc.next();
+	    		Nut n = new Nut("견과", name);
+	    		if(fc.removeFarm(n)) {
+	    			System.out.println("구매 취소에 성공하였습니다.");
+	    			return;
+	    		}
+	    		else {
+	    			System.out.println("구매매 목록에 존재하지 않습니다. 다시 입력해주세요.");
+	    			break;
+	    		}
+	    	default : System.out.println("잘못 입력하셨습니다. 다시 입력해주세요");	break;
+	    	}
+    	}
+    }
+    public void printBuyFarm() {
+    	ArrayList<Farm> buyList= fc.printBuyFarm();
+    	Iterator<Farm> iter = buyList.iterator();
+    	while(iter.hasNext()) {
+    		System.out.println("종류: " + iter.next();() + ", 이름: " + farm.getName());
+		}
+    	
+    }
+}
+
+----------------------------------- SOURCE END -------------------------------------
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2047)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3853)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1953)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1990)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3095)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3013)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3504)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3087)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3390)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1534)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:540)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:201)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:132)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:94)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:91)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:158)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.jdt.ui 4 2 2024-01-16 02:33:31.587
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.ui".
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2047)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3853)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1953)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1990)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3095)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3013)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3504)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3087)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3390)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1534)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:540)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:201)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:132)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:94)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:91)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:158)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.jdt.ui 4 0 2024-01-16 02:33:31.588
+!MESSAGE Error in JDT Core during reconcile
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1287)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2047)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3853)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1953)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1990)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3095)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3013)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3504)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3087)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3390)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1534)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:540)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:201)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:132)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:94)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:91)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:158)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)

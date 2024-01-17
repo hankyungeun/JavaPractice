@@ -1,16 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.kh.practice.point.controller.CircleController"/>
-    <fullyQualifiedTypeName name="com.kh.practice.point.controller.RectangleController"/>
-    <fullyQualifiedTypeName name="com.kh.practice.point.view.PointMenu"/>
-    <fullyQualifiedTypeName name="com.kh.hw.person.controller.PersonController"/>
-    <fullyQualifiedTypeName name="com.kh.hw.person.view.PersonMenu"/>
-    <fullyQualifiedTypeName name="com.kh.hw.person.model.vo.Student"/>
-    <fullyQualifiedTypeName name="com.kh.hw.person.model.vo.Employee"/>
-    <fullyQualifiedTypeName name="com.kh.practice.chap01_poly.model.vo.AniBook"/>
-    <fullyQualifiedTypeName name="com.kh.practice.chap01_poly.model.vo.CookBook"/>
-    <fullyQualifiedTypeName name="com.kh.practice.chap01_poly.model.vo.Member"/>
-    <fullyQualifiedTypeName name="com.kh.practice.chap01_poly.model.vo.Book"/>
     <fullyQualifiedTypeName name="com.kh.practice.chap01_poly.view.LibraryMenu"/>
     <fullyQualifiedTypeName name="com.kh.practice.chap01_poly.controller.LibraryController"/>
     <fullyQualifiedTypeName name="com.kh.model.vo.User"/>
@@ -31,7 +20,6 @@
     <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="java.lang.StringBuffer"/>
     <fullyQualifiedTypeName name="java.io.FileReader"/>
-    <fullyQualifiedTypeName name="java.io.IOException"/>
     <fullyQualifiedTypeName name="java.io.File"/>
     <fullyQualifiedTypeName name="com.kh.practice.file.view.FileMenu"/>
     <fullyQualifiedTypeName name="com.kh.generic.practice1.Material"/>
@@ -39,7 +27,6 @@
     <fullyQualifiedTypeName name="com.kh.generic.practice1.Powder"/>
     <fullyQualifiedTypeName name="com.kh.hospital_reception.model.vo.CustomArray"/>
     <fullyQualifiedTypeName name="com.kh.hospital_reception.model.vo.Book"/>
-    <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="com.kh.hospital_reception.model.vo.StringArray"/>
     <fullyQualifiedTypeName name="java.util.LinkedList"/>
     <fullyQualifiedTypeName name="java.util.Random"/>
@@ -49,7 +36,6 @@
     <fullyQualifiedTypeName name="java.awt.image.TileObserver"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="com.kh.practice.list.music.model.vo.Music"/>
-    <fullyQualifiedTypeName name="java.util.Scanner"/>
     <fullyQualifiedTypeName name="com.kh.practice.list.music.controller.MusicController"/>
     <fullyQualifiedTypeName name="com.kh.practice.list.music.view.MusicView"/>
     <fullyQualifiedTypeName name="java.util.HashSet"/>
@@ -58,6 +44,20 @@
     <fullyQualifiedTypeName name="com.kh.set.practice.Member"/>
     <fullyQualifiedTypeName name="com.kh.map.practice.MemberHashMap"/>
     <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="com.kh.practice.generics.model.vo.Fruit"/>
+    <fullyQualifiedTypeName name="com.kh.practice.generics.view.FarmMenu"/>
     <fullyQualifiedTypeName name="com.kh.practice.generics.model.vo.Farm"/>
+    <fullyQualifiedTypeName name="com.kh.practice.generics.model.vo.Nut"/>
+    <fullyQualifiedTypeName name="com.kh.practice.generics.model.vo.Vegetable"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.net.InetAddress"/>
+    <fullyQualifiedTypeName name="java.net.ServerSocket"/>
+    <fullyQualifiedTypeName name="java.awt.BufferCapabilities"/>
+    <fullyQualifiedTypeName name="java.net.Socket"/>
+    <fullyQualifiedTypeName name="java.io.BufferedReader"/>
+    <fullyQualifiedTypeName name="java.io.InputStreamReader"/>
+    <fullyQualifiedTypeName name="java.io.PrintWriter"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="java.io.IOException"/>
 </qualifiedTypeNameHistroy>
